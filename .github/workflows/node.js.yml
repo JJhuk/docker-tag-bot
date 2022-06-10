@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,4 +26,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm start ${{ secrets.TOKEN }} github.event.pull_request.labels ${{ github.head_ref }}.${{ github.sha }}
+    - run: npm start ${{ secrets.TOKEN }} ${{ github.event.pull_request.labels }} ${{ github.head_ref }}.${{ github.sha }}
