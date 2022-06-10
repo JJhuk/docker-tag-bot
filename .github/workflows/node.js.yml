@@ -20,11 +20,16 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install
-    - run: npm start ${{ secrets.TOKEN }} ${{ github.event.pull_request.labels }} ${{ github.head_ref }}.${{ github.sha }}
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm install
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Check outputsA
+        run: echo ${{ steps.vars.outputs.sha_short }}
+      - run: npm start ${{ secrets.TOKEN }} ${{ github.event.pull_request.labels.*.name }} ${{ steps.vars.outputs.sha_short }}
