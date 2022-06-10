@@ -24,5 +24,4 @@ if ((argv.labels as string[]) && (argv.commits as string)) {
 } else {
   console.log("No labels provided");
 }
-// Returns a normal Octokit PR response
 // See https://octokit.github.io/rest.js/#octokit-routes-pulls-create
