@@ -13,7 +13,7 @@ export class OptionBuilder {
     this.commitHash = commitHash;
   }
 
-  public createChanges(): Changes[] {
+  private createChanges(): Changes[] {
     return this.labels.map((label: string) => {
       const yamlContent = changeTag(label, this.commitHash);
 
@@ -28,7 +28,7 @@ export class OptionBuilder {
     });
   }
 
-  build(): Options {
+  public build(): Options {
     const changes = this.createChanges();
 
     return {
