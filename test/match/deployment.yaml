@@ -9,7 +9,8 @@ spec:
     spec:
       containers:
         - name: app
-          image: 677979501910.dkr.ecr.ap-northeast-2.amazonaws.com/nk-backend/match:main-1f73114
+          image: >-
+            path/match:main-1f73114
           ports:
             - name: http
               containerPort: 80
@@ -20,18 +21,7 @@ spec:
               name: configmap
               readOnly: true
               subPath: appsettings.json
-            - mountPath: /app/paseto.json
-              name: paseto
-              readOnly: true
-              subPath: paseto.json
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "1Gi"
       volumes:
         - name: configmap
           configMap:
             name: match-cm
-        - name: paseto
-          secret:
-            secretName: paseto

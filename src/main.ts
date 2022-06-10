@@ -1,27 +1,27 @@
-import {Octokit} from "@octokit/core";
-import {myPlugin} from "./myPlugin";
+import { Octokit } from "@octokit/core";
 import yargs from "yargs";
-import {changeTag} from "./tagModifier";
+import { changeTag } from "./tagModifier";
+import { PullRequest } from "./PullRequest";
 
-changeTag("", "1");
+const MyOctokit = Octokit.plugin(PullRequest);
 
-const MyOctokit = Octokit.plugin(myPlugin);
-
-const argv = yargs(process.argv.slice(2)).options({
-  token: { type: 'string', default: false},
-  labels: {type: 'array'},
-}).parseSync();
+const argv = yargs(process.argv.slice(2))
+  .options({
+    token: { type: "string" },
+    labels: { type: "array" },
+    commits: { type: "string" },
+  })
+  .parseSync();
 
 const octokit = new MyOctokit({
   auth: argv.token,
 });
 
-if (argv.labels as string[]) {
+if ((argv.labels as string[]) && (argv.commits as string)) {
   octokit
-    .myFunction(argv.labels as string[])
+    .pullRequest(argv.labels as string[], argv.commits as string)
     .then(console.log);
-}
-else {
+} else {
   console.log("No labels provided");
 }
 // Returns a normal Octokit PR response
