@@ -32,6 +32,4 @@ jobs:
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Check outputsA
         run: echo ${{ steps.vars.outputs.sha_short }}
-      - name: check labels
-        run: echo ${{ toJson(github.event.pull_request.labels.*.name) }}
       - run: npm start ${{ secrets.TOKEN }} ${{ toJson(github.event.pull_request.labels.*.name) }} ${{ steps.vars.outputs.sha_short }}

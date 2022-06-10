@@ -16,6 +16,8 @@ const octokit = new MyOctokit({
   auth: argv.token,
 });
 
+console.log(`label ${argv.labels}, commits ${argv.commits}`);
+
 octokit
   .pullRequest(argv.labels as string[], argv.commits as string)
   .then(console.log);
