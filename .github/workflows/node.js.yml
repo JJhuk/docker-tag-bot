@@ -26,4 +26,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: npm install ts-node -g
     - run: npm start ${{ secrets.TOKEN }} ${{ github.event.pull_request.labels }} ${{ github.head_ref }}.${{ github.sha }}
