@@ -32,8 +32,12 @@ export class OptionBuilder {
       });
   }
 
-  public build(): Options {
+  public build(): Options | null {
     const changes = this.createChanges();
+
+    if (changes.length == 0) {
+      return null;
+    }
 
     return {
       owner: config.get("pr.owner"),

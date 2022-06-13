@@ -22,7 +22,13 @@ export function PullRequest(octokit: Octokit) {
         commitHash
       );
 
-      return await composeCreatePullRequest(octokit, optionBuilder.build());
+      const commits = optionBuilder.build();
+
+      if (commits == null) {
+        return;
+      }
+
+      return await composeCreatePullRequest(octokit, commits);
     },
   };
 }
