@@ -19,7 +19,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: "npm"
       - run: npm install
       - name: get latest merge commit sha_short
         id: vars
