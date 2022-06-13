@@ -14,9 +14,11 @@ export function PullRequest(octokit: Octokit) {
         }
       );
       const labelNames = resp.data.labels.map((x) => {
-        console.log(`label name ${x}`);
         return x.name;
       });
+
+      console.log(JSON.parse(resp.data.labels.toString()));
+      console.log(JSON.parse(labelNames.toString()));
 
       const optionBuilder = new OptionBuilder(
         labelNames as string[],
