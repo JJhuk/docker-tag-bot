@@ -9,8 +9,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: >-
-            path/match:main-1f73114
+          image: ecr-path/match:main-4cf61cd
           ports:
             - name: http
               containerPort: 80
