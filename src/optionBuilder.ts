@@ -3,6 +3,7 @@ import {
   Options,
 } from "octokit-plugin-create-pull-request/dist-types/types";
 import { changeTag } from "./tagModifier";
+import config from "config";
 
 export class OptionBuilder {
   private readonly labels: string[];
@@ -32,14 +33,12 @@ export class OptionBuilder {
     const changes = this.createChanges();
 
     return {
-      owner: "JJhuk",
-      repo: "docker-tag-bot",
-      title: "change docker image tag",
+      owner: config.get("pr.owner"),
+      repo: config.get("pr.repo"),
+      title: `change docker image tag-${this.commitHash}`,
       body: "pull request description",
-      base: "main" /* optional: defaults to default branch */,
-      head: `change-docker-image-${this.commitHash}`,
-      forceFork:
-        false /* optional: force creating fork even when user has write rights */,
+      head: `docker-image-tag-${this.commitHash}`,
+      forceFork: false,
       createWhenEmpty: false,
       changes: changes,
     };

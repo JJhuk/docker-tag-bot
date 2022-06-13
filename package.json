@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/config": "^0.0.41",
     "@types/node": "^17.0.38",
     "@types/yargs": "^17.0.10",
     "ts-node": "^10.8.1",
@@ -18,9 +19,9 @@
   },
   "dependencies": {
     "@octokit/core": "^3.6.0",
-    "@types/js-yaml": "^4.0.5",
-    "js-yaml": "^4.1.0",
+    "config": "^3.3.7",
     "octokit-plugin-create-pull-request": "^3.11.0",
+    "yaml": "^2.1.1",
     "yargs": "^17.1.1-candidate.0"
   }
 }

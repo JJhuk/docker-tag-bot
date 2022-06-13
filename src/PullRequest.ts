@@ -17,9 +17,6 @@ export function PullRequest(octokit: Octokit) {
         return x.name;
       });
 
-      console.log(JSON.parse(resp.data.labels.toString()));
-      console.log(JSON.parse(labelNames.toString()));
-
       const optionBuilder = new OptionBuilder(
         labelNames as string[],
         commitHash
