@@ -5,10 +5,10 @@
   "main": "src/main.ts",
   "scripts": {
     "compile": "tsc",
-    "start": "ts-node src/main.ts"
+    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts"
   },
-  "type": "module",
   "keywords": [],
+  "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
