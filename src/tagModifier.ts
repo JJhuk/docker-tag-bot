@@ -1,30 +1,28 @@
-import yaml from "js-yaml";
 import fs from "fs";
-import { labelToPath } from "./labels";
-import { Deployment, Fleet } from "./yamlSchemes/scheme";
+import YAML from "yaml";
+import config from "config";
 
-export function changeTag(tag: string, hash: string): YamlContent {
-  const path = labelToPath[tag];
+export function changeTag(label: string, hash: string): YamlContent {
+  const path: string = config.get(`yaml-path.${label}`);
   if (path == undefined) {
-    throw `cannot resolve label ${tag}`;
+    throw `cannot resolve label ${label}`;
   }
 
-  const loadedYaml = yaml.load(fs.readFileSync(path, "utf8"));
-  let image: string;
-  if (tag == "multi") {
-    const fleetYaml = loadedYaml as Fleet;
-    image = fleetYaml.spec.template.spec.template.spec.containers[0].image;
-  } else {
-    const deploymentYaml = loadedYaml as Deployment;
-    image = deploymentYaml.spec.template.spec.containers[0].image;
-  }
+  const registryPath = config.get("image-registry");
+  const readFileSync = fs.readFileSync(path, "utf8");
+  const parsed = YAML.parseDocument(readFileSync);
 
-  //todo should extract to config
-  const registryPath = "path";
-  image = `${registryPath}/${tag}:main-${hash}`;
+  YAML.visit(parsed, {
+    Pair(_, pair) {
+      // @ts-ignore
+      if (pair.key && pair.key.value === "image") {
+        pair.value = `${registryPath}/${label}:main-${hash}`;
+      }
+    },
+  });
 
   return {
-    content: yaml.dump(loadedYaml),
+    content: String(parsed),
     path: path,
   };
 }

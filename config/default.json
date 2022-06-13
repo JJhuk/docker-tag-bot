@@ -1,0 +1,11 @@
+{
+  "pr": {
+    "owner": "JJhuk",
+    "repo": "docker-tag-bot"
+  },
+  "image-registry": "ecr-path",
+  "yaml-path": {
+    "match": "test/match/deployment.yaml",
+    "multi": "test/multi/Fleet.yaml"
+  }
+}
