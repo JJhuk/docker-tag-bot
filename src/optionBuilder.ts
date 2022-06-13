@@ -15,18 +15,21 @@ export class OptionBuilder {
   }
 
   private createChanges(): Changes[] {
-    return this.labels.map((label: string) => {
-      const yamlContent = changeTag(label, this.commitHash);
+    let yaml: { [key: string]: string } = config.get("yaml-path");
+    return this.labels
+      .filter((x) => x in yaml)
+      .map((label: string) => {
+        const yamlContent = changeTag(label, this.commitHash);
 
-      let change: Changes = {
-        files: {
-          [yamlContent.path]: yamlContent.content,
-        },
-        commit: `change ${label} docker image tag`,
-      };
+        let change: Changes = {
+          files: {
+            [yamlContent.path]: yamlContent.content,
+          },
+          commit: `change ${label} docker image tag`,
+        };
 
-      return change;
-    });
+        return change;
+      });
   }
 
   public build(): Options {
