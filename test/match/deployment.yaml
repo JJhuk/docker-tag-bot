@@ -10,7 +10,7 @@ spec:
       containers:
         - name: app
           image: >-
-            path/match:main-1f73114
+            677979501910.dkr.ecr.ap-northeast-2.amazonaws.com/nk-backend/match:main-b70915a
           ports:
             - name: http
               containerPort: 80
