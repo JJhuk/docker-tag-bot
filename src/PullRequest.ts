@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/core";
 import { OptionBuilder } from "./optionBuilder";
 import { composeCreatePullRequest } from "octokit-plugin-create-pull-request";
+import config from "config";
 
 export function PullRequest(octokit: Octokit) {
   return {
@@ -8,8 +9,8 @@ export function PullRequest(octokit: Octokit) {
       const resp = await octokit.request(
         "GET /repos/{owner}/{repo}/pulls/{pull_number}",
         {
-          owner: "JJhuk",
-          repo: "docker-tag-bot",
+          owner: config.get<string>("pr.owner"),
+          repo: config.get<string>("pr.repo"),
           pull_number: prNum,
         }
       );
