@@ -32,12 +32,12 @@ export class OptionBuilder {
     const changes = this.createChanges();
 
     return {
-      owner: "docker-tag-commit-bot",
-      repo: "repo-name",
-      title: "pull request title",
+      owner: "JJhuk",
+      repo: "docker-tag-bot",
+      title: "change docker image tag",
       body: "pull request description",
       base: "main" /* optional: defaults to default branch */,
-      head: "pull-request-branch-name",
+      head: `change-image ${this.commitHash}`,
       forceFork:
         false /* optional: force creating fork even when user has write rights */,
       createWhenEmpty: false,
