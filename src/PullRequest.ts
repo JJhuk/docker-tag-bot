@@ -8,7 +8,7 @@ export function PullRequest(octokit: Octokit) {
       const resp = await octokit.request(
         "GET /repos/{owner}/{repo}/pulls/{pull_number}",
         {
-          owner: "jjhuk",
+          owner: "JJhuk",
           repo: "docker-tag-bot",
           pull_number: prNum,
         }
