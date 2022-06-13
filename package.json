@@ -7,6 +7,7 @@
     "compile": "tsc",
     "start": "ts-node src/main.ts"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
