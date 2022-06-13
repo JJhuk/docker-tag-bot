@@ -37,7 +37,7 @@ export class OptionBuilder {
       title: "change docker image tag",
       body: "pull request description",
       base: "main" /* optional: defaults to default branch */,
-      head: `change-image ${this.commitHash}`,
+      head: `change-docker-image-${this.commitHash}`,
       forceFork:
         false /* optional: force creating fork even when user has write rights */,
       createWhenEmpty: false,
