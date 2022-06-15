@@ -1,7 +1,4 @@
-import {
-  Changes,
-  Options,
-} from "octokit-plugin-create-pull-request/dist-types/types";
+import { Changes, Options } from "octokit-plugin-create-pull-request/dist-types/types";
 import { changeTag } from "./tagModifier";
 import config from "config";
 
