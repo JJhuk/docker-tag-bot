@@ -29,8 +29,8 @@ def commit(label, repository, short_sha):
     os.chdir(label)
     image = f'{repository}/nk-backend/{label}:main-{short_sha}'
     kustomize = subprocess.run(["kustomize", "edit", "set", "image", image], capture_output=True, check=True, text=True)
-    print('stdout:', kustomize.stdout.decode())
-    print('stdout:', kustomize.stderr.decode())
+    print('stdout:', kustomize.stdout)
+    print('stdout:', kustomize.stderr)
     subprocess.run(["git", "add", "-A"])
     subprocess.run(["git", "commit", "-m", f'edit-image-tag-{label}'])
     os.chdir('../')
