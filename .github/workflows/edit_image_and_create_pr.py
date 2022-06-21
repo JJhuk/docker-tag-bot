@@ -48,7 +48,7 @@ def main():
     parser.add_argument("token")
     parser.add_argument("repository")
     parser.add_argument("short_sha")
-    parser.add_argument("pr_num")
+    parser.add_argument("pr_num", type=int)
     args = parser.parse_args()
 
     repo = get_repo(args.token)
