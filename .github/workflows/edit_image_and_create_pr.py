@@ -18,6 +18,8 @@ def get_labels(repo):
 
 def create_branch(branch_name):
     print(f'created branch {branch_name}')
+    subprocess.run(["git", "config", "--global", "user.email", "ly0738j@gmail.com"])
+    subprocess.run(["git", "config", "--global", "user.name", "JJhuk"])
     subprocess.run(["git", "branch", branch_name])
     subprocess.run(["git", "checkout", branch_name])
 
