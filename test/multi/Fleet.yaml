@@ -57,7 +57,7 @@ spec:
         spec:
           containers:
             - name: app
-              image: ecr-path/multi:main-4cf61cd
+              image: ecr-path/multi:main-d1dc0de
               volumeMounts:
                 - mountPath: /app/appsettings.json
                   name: configmap
