@@ -33,6 +33,7 @@ def commit(label, repository, short_sha):
 
 
 def create_pull_request(labels, repository, short_sha, repo):
+    os.chdir("test")
     branch_name = f'edit-image-tag-{short_sha}'
     create_branch(branch_name)
     for label in labels:
