@@ -9,16 +9,15 @@ def get_repo(token):
     return g.get_repo("JJhuk/docker-tag-bot")
 
 
-def get_labels(repo):
+def get_labels(repo, pr_num):
     target_label = ['gdos', 'match', 'multi']
-    pr = repo.get_pull(30)
+    pr = repo.get_pull(pr_num)
     label_list = [x.name for x in pr.labels]
     return list(filter(lambda x: x in target_label, label_list))
 
 
 def create_branch(branch_name):
     print(f'created branch {branch_name}')
-    subprocess.run(["git", "config", "--global", "user.name", "JJhuk"])
     subprocess.run(["git", "branch", branch_name])
     subprocess.run(["git", "checkout", branch_name])
 
@@ -45,8 +44,6 @@ def create_pull_request(labels, repository, short_sha, repo):
 
 
 def main():
-    print(os.getcwd())
-    os.chdir("test")
     parser = argparse.ArgumentParser()
     parser.add_argument("token")
     parser.add_argument("repository")
@@ -55,7 +52,11 @@ def main():
     args = parser.parse_args()
 
     repo = get_repo(args.token)
-    labels = get_labels(repo)
+    labels = get_labels(repo, args.pr_num)
+
+    if labels is []:
+        return
+
     create_pull_request(labels, "677979501910.dkr.ecr.ap-northeast-2.amazonaws.com", args.short_sha, repo)
 
 
