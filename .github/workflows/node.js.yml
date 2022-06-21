@@ -30,4 +30,4 @@ jobs:
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Create Pull Request
-        run: python ./.github/workflows/edit_image_and_create_pr.py ${{ secrets.TOKEN }} "$REPOSITORY" ${{ steps.vars.outputs.sha_short }} ${{ steps.vars.outputs.sha_short }}
+        run: python ./.github/workflows/edit_image_and_create_pr.py ${{ secrets.TOKEN }} "$REPOSITORY" ${{ steps.vars.outputs.sha_short }} ${{ github.event.number }}
