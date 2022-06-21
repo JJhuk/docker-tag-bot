@@ -1,17 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
+
 kind: Kustomization
 
-labels:
-  - pairs:
-      app.kubernetes.io/name: match
-      app.kubernetes.io/instance: match
-    includeSelectors: true
-  - pairs:
-      app.kubernetes.io/part-of: nk-backend
-
 resources:
-  - deployment.yaml
+- deployment.yaml
 
 images:
-  - name: ecr-path/match
-    newTag: main-c53e01b
+- name: 677979501910.dkr.ecr.ap-northeast-2.amazonaws.com/nk-backend/match
+  newTag: main-1f759c3
+- name: ecr-path/match
+  newTag: main-c53e01b
