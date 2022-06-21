@@ -28,7 +28,9 @@ def create_branch(branch_name):
 def commit(label, repository, short_sha):
     os.chdir(label)
     image = f'{repository}/nk-backend/{label}:main-{short_sha}'
-    subprocess.run(["kustomize", "edit", image], capture_output=True, check=True, text=True)
+    kustomize = subprocess.run(["kustomize", "edit", "set", "image", image], capture_output=True, check=True, text=True)
+    print('stdout:', kustomize.stdout.decode())
+    print('stdout:', kustomize.stderr.decode())
     subprocess.run(["git", "add", "-A"])
     subprocess.run(["git", "commit", "-m", f'edit-image-tag-{label}'])
     os.chdir('../')
@@ -42,7 +44,7 @@ def create_pull_request(labels, repository, short_sha, repo):
         commit(label, repository, short_sha)
 
     subprocess.run(["git", "push", "-u", "origin", branch_name])
-    pr =repo.create_pull(title="Use 'requests' instead of 'httplib'", body="main", head=branch_name, base="master")
+    pr =repo.create_pull(title="Docker Image Update", body="main", head=branch_name, base="master")
     print(f'created pull request {pr.number}')
 
 
