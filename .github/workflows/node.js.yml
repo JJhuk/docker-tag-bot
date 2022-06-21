@@ -18,6 +18,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Install Kustomize
+        run: |
+          wget -O kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${{ matrix.kustomize_version }}/kustomize_v${{ matrix.kustomize_version }}_linux_amd64.tar.gz
+          sudo tar -xvf kustomize.tar.gz -C /usr/local/bin/
       - name: set up Python
         uses: actions/setup-python@v3
         with:
