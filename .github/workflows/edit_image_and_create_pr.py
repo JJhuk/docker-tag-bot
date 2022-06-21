@@ -42,7 +42,7 @@ def create_pull_request(labels, repository, short_sha, repo):
         commit(label, repository, short_sha)
 
     subprocess.run(["git", "push", "-u", "origin", branch_name])
-    pr =repo.create_pull(title="Use 'requests' instead of 'httplib'", body="main", head=branch_name, base="main")
+    pr =repo.create_pull(title="Use 'requests' instead of 'httplib'", body="main", head=branch_name, base="master")
     print(f'created pull request {pr.number}')
 
 
