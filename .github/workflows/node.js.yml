@@ -13,16 +13,21 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      REPOSITORY: 677979501910.dkr.ecr.ap-northeast-2.amazonaws.com
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: set up Python
+        uses: actions/setup-python@v3
         with:
-          node-version: 14
-      - run: npm install
-      - name: get latest merge commit sha_short
+          python_version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub
+      - name: get merge commit's short-sha
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - name: Check outputsA
-        run: echo ${{ steps.vars.outputs.sha_short }}
-      - run: npm start ${{ secrets.TOKEN }} ${{ github.event.number }} ${{ steps.vars.outputs.sha_short }}
+      - name: Create Pull Request
+        run: python ./.github/workflows/edit_image_and_create_pr.py ${{ secrets.TOKEN }} "$REPOSITORY" ${{ steps.vars.outputs.sha_short }} ${{ steps.vars.outputs.sha_short }}
