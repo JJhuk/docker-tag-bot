@@ -18,7 +18,6 @@ def get_labels(repo):
 
 def create_branch(branch_name):
     print(f'created branch {branch_name}')
-    subprocess.run(["git", "config", "--global", "user.email", "ly0738j@gmail.com"])
     subprocess.run(["git", "config", "--global", "user.name", "JJhuk"])
     subprocess.run(["git", "branch", branch_name])
     subprocess.run(["git", "checkout", branch_name])
@@ -41,11 +40,7 @@ def create_pull_request(labels, repository, short_sha, repo):
         commit(label, repository, short_sha)
 
     subprocess.run(["git", "push", "-u", "origin", branch_name])
-    pr = repo.create_pull(
-        title="docker-image-update",
-        head=branch_name,
-        base="main",
-    )
+    pr = repo.create_pull(title="docker-image-update", head=branch_name, base="main")
     print(f'created pull request {pr.number}')
 
 
