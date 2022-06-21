@@ -1,3 +1,4 @@
+from re import sub
 from github import Github
 import argparse
 import subprocess
@@ -18,6 +19,7 @@ def get_labels(repo, pr_num):
 
 def create_branch(branch_name):
     print(f'created branch {branch_name}')
+    subprocess.run(["git", "config", "user.name", "pr-bot"])
     subprocess.run(["git", "branch", branch_name])
     subprocess.run(["git", "checkout", branch_name])
 
