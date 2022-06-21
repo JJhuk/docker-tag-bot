@@ -15,11 +15,6 @@ spec:
               containerPort: 80
             - name: health
               containerPort: 5001
-          volumeMounts:
-            - mountPath: /app/appsettings.json
-              name: configmap
-              readOnly: true
-              subPath: appsettings.json
       volumes:
         - name: configmap
           configMap:
