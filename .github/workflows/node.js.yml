@@ -8,6 +8,8 @@ on:
     types:
       - closed
       - labeled
+  repository_dispatch:
+    types: [jenkins]
 
 jobs:
   if_merged:
